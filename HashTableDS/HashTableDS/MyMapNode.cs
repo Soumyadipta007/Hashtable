@@ -51,19 +51,25 @@ namespace HashTableDS
             }
             return 0;
         }
-        public int getFrequencyOfWords(K key)
+        public void Remove(K key)
         {
             int position = GetArrayPosition(key);
             LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
+            bool itemFound = false;
+            KeyValue<K, V> foundItem = default(KeyValue<K, V>);
             foreach (KeyValue<K, V> item in linkedList)
             {
                 if (item.Key.Equals(key))
                 {
-                    string s = item.Value.ToString();
-                    return s.Split(" ").Length;
+                    itemFound = true;
+                    foundItem = item;
                 }
             }
-            return 0;
+            if (itemFound)
+            {
+                Console.WriteLine(key + " removed");
+                linkedList.Remove(foundItem);
+            }
         }
         public struct KeyValue<k, v>
         {
